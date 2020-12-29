@@ -26,10 +26,10 @@ public class BeerDto {
     private Integer version;
 
     @Null
-    private OffsetDateTime createdTime;
+    private OffsetDateTime createdDate;
 
     @Null
-    private OffsetDateTime lastModifiedTime;
+    private OffsetDateTime lastModifiedDate;
 
     @NotBlank
     private String beerName;

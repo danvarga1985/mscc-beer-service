@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -37,10 +38,7 @@ class BeerControllerTest {
 
     @Test
     void saveNewBeer() throws Exception {
-        BeerDto beerDto = BeerDto.builder()
-                .beerName("Pabst Blue Ribbon")
-                .beerStyle(BeerStyleEnum.LAGER)
-                .build();
+        BeerDto beerDto = getValidBeerDto();
 
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
@@ -52,10 +50,7 @@ class BeerControllerTest {
 
     @Test
     void updateBeerById() throws Exception {
-        BeerDto beerDto = BeerDto.builder()
-                .beerName("Pabst Blue Ribbon")
-                .beerStyle(BeerStyleEnum.LAGER)
-                .build();
+        BeerDto beerDto = getValidBeerDto();
 
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
@@ -63,5 +58,14 @@ class BeerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isNoContent());
+    }
+
+    BeerDto getValidBeerDto() {
+        return BeerDto.builder()
+                .beerName("Test Beer")
+                .beerStyle(BeerStyleEnum.LAGER)
+                .price(new BigDecimal(("2.00")))
+                .upc(34532452345L)
+                .build();
     }
 }
