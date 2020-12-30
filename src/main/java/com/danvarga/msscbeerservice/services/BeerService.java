@@ -1,6 +1,5 @@
 package com.danvarga.msscbeerservice.services;
 
-import com.danvarga.msscbeerservice.web.controller.NotFoundException;
 import com.danvarga.msscbeerservice.web.model.BeerDto;
 import org.springframework.stereotype.Service;
 

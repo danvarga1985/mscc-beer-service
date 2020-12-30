@@ -41,8 +41,7 @@ public class BeerDto {
     private BeerStyleEnum beerStyle;
 
     @NotNull
-    @Positive
-    private Long upc;
+    private String upc;
 
     // Set Json serialization property format to String.
     @JsonFormat(shape = JsonFormat.Shape.STRING)
