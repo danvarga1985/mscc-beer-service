@@ -9,6 +9,7 @@ import com.danvarga.msscbeerservice.web.model.BeerPagedList;
 import com.danvarga.msscbeerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,8 @@ public class BeerServiceImpl implements BeerService {
 
     @SneakyThrows
     @Override
+    // Conditional caching - only if Inventory information is not needed, as it tends to change frequently.
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
     public BeerDto getById(UUID beerId, Boolean showInventoryOnHand) {
 
         if (showInventoryOnHand) {
@@ -58,10 +61,13 @@ public class BeerServiceImpl implements BeerService {
         return beerMapper.beerToBeerDto(savedBeer);
     }
 
+    // Conditional caching - only if Inventory information is not needed, as it tends to change frequently.
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false")
     @Override
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest,
                                    Boolean showInventoryOnHand) {
 
+        System.out.println("i was called");
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
