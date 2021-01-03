@@ -41,6 +41,27 @@ public class BeerServiceImpl implements BeerService {
         }
     }
 
+    @SneakyThrows
+    @Override
+    @Cacheable(cacheNames = "beerUpcCache", key = "#beerUpc", condition = "#showInventoryOnHand == false ")
+    public BeerDto getByUpc(String beerUpc, Boolean showInventoryOnHand) {
+        if (showInventoryOnHand) {
+            try {
+                return beerMapper.beerToBeerDtoWithInventory(
+                        beerRepository.findByUpc(beerUpc));
+            } catch (NullPointerException ex) {
+                throw new NotFoundException();
+            }
+        } else {
+            Beer foundBeer = beerRepository.findByUpc(beerUpc);
+            if (foundBeer == null) {
+                throw new NotFoundException();
+            } else {
+                return beerMapper.beerToBeerDto(foundBeer);
+            }
+        }
+    }
+
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
         return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDto)));
@@ -67,7 +88,6 @@ public class BeerServiceImpl implements BeerService {
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest,
                                    Boolean showInventoryOnHand) {
 
-        System.out.println("i was called");
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
