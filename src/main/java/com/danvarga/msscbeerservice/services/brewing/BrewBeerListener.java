@@ -10,7 +10,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.handler.annotation.Headers;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.jms.Message;
 
 @Service
 @RequiredArgsConstructor
@@ -20,8 +26,9 @@ public class BrewBeerListener {
     private final BeerRepository beerRepository;
     private final JmsTemplate jmsTemplate;
 
+    @Transactional
     @JmsListener(destination = JmsConfig.BREWING_REQUEST_QUEUE)
-    public void listen(BrewBeerEvent event) {
+    public void listen(@Payload BrewBeerEvent event, @Headers MessageHeaders headers, Message message) {
         BeerDto beerDto = event.getBeerDto();
 
         Beer beer = beerRepository.getOne(beerDto.getId());
