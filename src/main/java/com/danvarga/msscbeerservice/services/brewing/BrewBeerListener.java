@@ -2,21 +2,16 @@ package com.danvarga.msscbeerservice.services.brewing;
 
 import com.danvarga.msscbeerservice.config.JmsConfig;
 import com.danvarga.msscbeerservice.domain.Beer;
-import com.danvarga.msscbeerservice.events.BrewBeerEvent;
-import com.danvarga.msscbeerservice.events.NewInventoryEvent;
+import com.danvarga.common.events.BrewBeerEvent;
+import com.danvarga.common.events.NewInventoryEvent;
 import com.danvarga.msscbeerservice.repositories.BeerRepository;
 import com.danvarga.msscbeerservice.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.handler.annotation.Headers;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.jms.Message;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +23,7 @@ public class BrewBeerListener {
 
     @Transactional
     @JmsListener(destination = JmsConfig.BREWING_REQUEST_QUEUE)
-    public void listen(@Payload BrewBeerEvent event, @Headers MessageHeaders headers, Message message) {
+    public void listen(BrewBeerEvent event) {
         BeerDto beerDto = event.getBeerDto();
 
         Beer beer = beerRepository.getOne(beerDto.getId());

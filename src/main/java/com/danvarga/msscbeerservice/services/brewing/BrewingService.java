@@ -2,7 +2,7 @@ package com.danvarga.msscbeerservice.services.brewing;
 
 import com.danvarga.msscbeerservice.config.JmsConfig;
 import com.danvarga.msscbeerservice.domain.Beer;
-import com.danvarga.msscbeerservice.events.BrewBeerEvent;
+import com.danvarga.common.events.BrewBeerEvent;
 import com.danvarga.msscbeerservice.repositories.BeerRepository;
 import com.danvarga.msscbeerservice.services.inventory.BeerInventoryService;
 import com.danvarga.msscbeerservice.web.mappers.BeerMapper;
