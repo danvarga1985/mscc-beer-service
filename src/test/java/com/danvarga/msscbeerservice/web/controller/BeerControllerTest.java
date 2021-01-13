@@ -2,8 +2,8 @@ package com.danvarga.msscbeerservice.web.controller;
 
 import com.danvarga.msscbeerservice.bootstrap.BeerLoader;
 import com.danvarga.msscbeerservice.services.BeerService;
-import com.danvarga.msscbeerservice.web.model.BeerDto;
-import com.danvarga.msscbeerservice.web.model.BeerStyleEnum;
+import com.danvarga.brewery.model.BeerDto;
+import com.danvarga.brewery.model.BeerStyleEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

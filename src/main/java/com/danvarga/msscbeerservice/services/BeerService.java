@@ -1,8 +1,8 @@
 package com.danvarga.msscbeerservice.services;
 
-import com.danvarga.msscbeerservice.web.model.BeerDto;
-import com.danvarga.msscbeerservice.web.model.BeerPagedList;
-import com.danvarga.msscbeerservice.web.model.BeerStyleEnum;
+import com.danvarga.brewery.model.BeerDto;
+import com.danvarga.brewery.model.BeerPagedList;
+import com.danvarga.brewery.model.BeerStyleEnum;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 

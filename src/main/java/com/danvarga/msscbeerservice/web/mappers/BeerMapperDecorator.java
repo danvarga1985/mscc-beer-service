@@ -2,7 +2,7 @@ package com.danvarga.msscbeerservice.web.mappers;
 
 import com.danvarga.msscbeerservice.domain.Beer;
 import com.danvarga.msscbeerservice.services.inventory.BeerInventoryService;
-import com.danvarga.msscbeerservice.web.model.BeerDto;
+import com.danvarga.brewery.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 

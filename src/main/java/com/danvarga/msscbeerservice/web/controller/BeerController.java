@@ -1,9 +1,9 @@
 package com.danvarga.msscbeerservice.web.controller;
 
 import com.danvarga.msscbeerservice.services.BeerService;
-import com.danvarga.msscbeerservice.web.model.BeerDto;
-import com.danvarga.msscbeerservice.web.model.BeerPagedList;
-import com.danvarga.msscbeerservice.web.model.BeerStyleEnum;
+import com.danvarga.brewery.model.BeerDto;
+import com.danvarga.brewery.model.BeerPagedList;
+import com.danvarga.brewery.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
