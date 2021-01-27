@@ -29,8 +29,11 @@ public class BeerController {
                                                    @RequestParam(value = "beerName", required = false) String beerName,
                                                    @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle,
                                                    @RequestParam(value = "showInventoryOnHand",
-                                                           defaultValue = "false") Boolean showInventoryOnHand) {
+                                                           required = false) Boolean showInventoryOnHand) {
 
+        if (showInventoryOnHand == null) {
+            showInventoryOnHand = false;
+        }
         if (pageNumber == null || pageNumber < 0) {
             pageNumber = DEFAULT_PAGE_NUMBER;
         }
